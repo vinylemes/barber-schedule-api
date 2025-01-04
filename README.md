@@ -1,4 +1,3 @@
 # barber-schedule-api
 
-teste vanessa
-teste 2
+BACKEND para Agenda de Barbearia

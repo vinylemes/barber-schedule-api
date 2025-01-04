@@ -1,24 +1,12 @@
 const express = require('express');
+const cors = require('cors');
+const userRoutes = require('./routes/userRoutes');
 const app = express();
-const PORT = 3000;
 
-// Middleware para parsing de JSON
 app.use(express.json());
+app.use(cors({origin: 'http://localhost:3001'}));
+app.use('/users', userRoutes);
 
-// Rota básica
-app.get('/', (req, res) => {
-  res.send('Bem-vindo à API REST com Express! Vanessa!');
-});
+app.listen(3000, () => console.log('Server is running on port 3000'));
 
-// Rota de exemplo
-app.get('/api/user', (req, res) => {
-  res.json({ name: 'Vanessa',
-             age: 18,
-             city: 'São Paulo'
-   });
-});
-
-// Inicia o servidor
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+module.exports = app;

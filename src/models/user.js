@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../configs/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const User = sequelize.define(
   'User',
@@ -22,6 +22,11 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    is_admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false,
+    },
   },
   {
     tableName: 'users', // Define o nome da tabela
@@ -35,4 +40,4 @@ User.beforeCreate(async (user, options) => {
   user.password = hashedPassword;
 });
 
-module.exports = User;
+module.exports = {User};

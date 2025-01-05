@@ -12,12 +12,8 @@ services:
     command: npx nodemon --legacy-watch src/server.js
     ports:
       - "3000:3000"
-    environment:
-      - DATABASE_HOST=db
-      - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=postgres
-      - DATABASE_NAME=mydatabase
+    env_file:
+      - .env
     depends_on:
       - db
 
@@ -36,3 +32,4 @@ services:
 
 volumes:
   postgres_data:
+

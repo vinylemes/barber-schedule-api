@@ -39,7 +39,11 @@ exports.login = async (req, res) => {
     }
 
     // Gera o token JWT
-    const token = jwt.sign({ userId: user.id }, 'barberShopSecretJwT', { expiresIn: '1h' });
+    const token = jwt.sign(
+      { userId: user.id },
+      process.env.ACCESS_TOKEN_SECRET, // Usa o mesmo segredo
+      { expiresIn: '1h' }
+  );
 
     res.status(200).json({ token });
 
@@ -93,5 +97,27 @@ exports.updatePassword = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erro ao atualizar senha' });
+  }
+};
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const { name, email, picture } = req.body;
+
+    // Verifica se o usuário existe
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+
+    // Atualiza o perfil
+    await user.update({ name, email, picture });
+
+    res.status(200).json({ message: 'Perfil atualizado com sucesso' });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao atualizar perfil' });
   }
 };

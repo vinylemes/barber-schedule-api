@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const userRouter = require('./routes/userRouter');
 const barbershopRouter = require('./routes/barbershopRouter');
+const planRouter = require('./routes/planRouter');
 
 app.use(express.json());
 
@@ -13,5 +14,6 @@ app.route('/').get((req, res) => {
 });
 app.use('/user', userRouter);
 app.use('/barbershop', barbershopRouter);
+app.use('/plan', planRouter);
 
 module.exports = app;

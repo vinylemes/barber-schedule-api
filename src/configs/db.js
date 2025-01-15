@@ -8,6 +8,12 @@ const sequelize = new Sequelize(
     host: process.env.DATABASE_HOST || 'localhost',
     port: process.env.DATABASE_PORT || 5432, 
     dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: process.env.DATABASE_SSL_MODE === 'require',
+        ca: process.env.DATABASE_CA_CERT,
+      },
+    },
   }
 );
 

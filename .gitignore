@@ -1,3 +1,6 @@
+#Certificados
+ca.pem
+
 # Logs
 logs
 *.log

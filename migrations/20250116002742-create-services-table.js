@@ -1,7 +1,8 @@
 'use strict';
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('services', {
       id: {
         allowNull: false,
@@ -14,15 +15,11 @@ module.exports = {
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: true,
       },
-      value: {
+      price: {
         type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      duration: {
-        type: Sequelize.INTEGER,
         allowNull: false,
       },
       isActive: {
@@ -30,11 +27,11 @@ module.exports = {
         allowNull: false,
         defaultValue: true,
       },
-      userId: {
+      barbershop_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'users', // Nome da tabela de usuários
+          model: 'barbershop', 
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -51,7 +48,7 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('services');
   },
 };

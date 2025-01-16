@@ -16,8 +16,5 @@ COPY . .
 # Expondo a porta 3000
 EXPOSE 3000
 
-# Definindo NODE_ENV como produção
-ENV NODE_ENV=production
-
 # Usando o npm start para produção
 CMD ["npm", "start"]

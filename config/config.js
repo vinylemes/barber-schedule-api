@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const environtment = process.env.NODE_ENV || 'development';
+const environment = process.env.NODE_ENV || 'development';
 
 module.exports = {
   development: {
@@ -25,4 +25,4 @@ module.exports = {
       },
     },
   },
-}[environtment];
+}[environment];

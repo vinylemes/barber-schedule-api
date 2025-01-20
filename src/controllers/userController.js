@@ -121,3 +121,18 @@ exports.updateProfile = async (req, res) => {
     res.status(500).json({ error: 'Erro ao atualizar perfil' });
   }
 };
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const id = req.user.userId;
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+    await user.destroy();
+    res.send({ message: 'Usuário removido com sucesso!' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao remover usuário.' });
+  }
+};
